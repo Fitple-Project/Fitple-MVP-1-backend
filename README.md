@@ -1,8 +1,8 @@
-# GymSparta-project
+# Fitple-project - MVP 1
 
-### ✅ GymSparta-project
+### ✅ Fitple-project - MVP 1
 
-프로젝트 기간 : 2024/07/17 ~ 2024/08/21
+프로젝트 기간 : 2024/08/26 ~
 
 ### ⬜ 헬스장과 고객을 매칭하는 B2C 서비스!
 
@@ -24,15 +24,15 @@
 
 
 
-## 💪😎 GymSparta Members
+## 💪😎 Fitple Members
 
 ## Team Introduce
 
 
-| <img src ="https://avatars.githubusercontent.com/u/167050271?v=4" width="160px" height="160px"> | <img src ="https://avatars.githubusercontent.com/u/163113361?v=4" width="160px" height="160px"> | <img src ="https://avatars.githubusercontent.com/u/65201784?v=4" width="160px" height="160px"> | <img src ="https://avatars.githubusercontent.com/u/165247479?v=4" width="160px" height="160px"> |
-|:----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
-|                                               팀장                                               |                                               부팀장                                               |                                               발표자                                               |                                               서기                                                |
-|                         이인빈<br>[@Been777](https://github.com/Been777)                          |                       이재석<br>[@jslee98](https://github.com/jaeseoklee98)                       |                          이여재<br>[@PokeMasterLEE](https://github.com/iyeojae)                          |                      손아엘<br>[@Luel1197](https://github.com/Luel1197)                      |
+| <img src ="https://avatars.githubusercontent.com/u/167050271?v=4" width="160px" height="160px"> | <img src ="https://avatars.githubusercontent.com/u/163113361?v=4" width="160px" height="160px"> | <img src ="https://avatars.githubusercontent.com/u/165247479?v=4" width="160px" height="160px"> |
+|:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
+|                                               팀장                                                |                                               부팀장                                               |                                               서기                                                |
+|            이인빈<br>[@Been777](https://github.com/Been777)                                        |            이재석<br>[@jslee98](https://github.com/jaeseoklee98)                                   |              손아엘<br>[@Luel1197](https://github.com/Luel1197)                                    |
 
 ## 🔥버전
 For building and running the application you need
