@@ -25,4 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Optional<User> findByPhoneNumberAndStatus(String phoneNumber, String status);
 
   void deleteAllByScheduledDeletionDateBefore(LocalDateTime now);
+
+  Optional<User> findByKakaoId(Long kakaoId);
 }

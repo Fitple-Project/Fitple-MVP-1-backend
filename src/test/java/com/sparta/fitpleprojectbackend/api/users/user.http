@@ -49,7 +49,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLslYTsnbTrlJQiLCJpYXQiOjE3M
 ### 유저 프로필 조회
 GET http://localhost:8080/api/profile/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZWwxMjEiLCJpYXQiOjE3MjE5MzE2NzksImV4cCI6MTcyMTkzMzQ3OX0.bz2-E8Ncejw2Hmizs2E4ZC0X4vRSCpTLwdnFlzkE8qI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZWwxMjEiLCJpYXQiOjE3MjYwNzQ1NjQsImV4cCI6MTcyNjA3NjM2NH0.CNB5195ZsSAipZgKAEBScPyttHrvu5Kaq3wjupbe9a0
 
 {
 

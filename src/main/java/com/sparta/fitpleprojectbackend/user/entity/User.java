@@ -71,6 +71,9 @@ public class User extends TimeStamped {
   @Column
   private LocalDateTime scheduledDeletionDate;
 
+  @Column
+  private Long kakaoId;
+
   public User() {
   }
 
@@ -120,5 +123,22 @@ public class User extends TimeStamped {
     this.mainAddress = userRequest.getMainAddress();
     this.detailedAddress = userRequest.getDetailedAddress();
     this.userPicture = userRequest.getUserPicture();
+  }
+
+  public User kakaoIdUpdate(Long kakaoId) {
+    this.kakaoId = kakaoId;
+    return this;
+  }
+
+  // 카카오 회원가입
+  public User(String userName, String email, String encodedPassword, Long kakaoId) {
+    this.userName = userName;
+    this.email = email;
+    this.accountId = email;
+    this.password = encodedPassword;
+    this.kakaoId = kakaoId;
+    this.status = "ACTIVE";
+    this.role = Role.USER;
+    this.isForeigner = false;
   }
 }
