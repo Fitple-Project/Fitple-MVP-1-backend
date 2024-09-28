@@ -47,3 +47,16 @@ kakao:
     client-id: A7EAB5C0E188BA0EF82B  # 클라이언트 ID
     client-secret: 749696A87ABCFA738A36  # 클라이언트 시크릿
     secret-key: PRD441A04CE52647D4E94FFA919FD67242007B40  # 시크릿 키
+
+naver:
+  client-id:
+  client-secret:
+  redirect-uri: http://localhost:8080/api/user/naver/callback
+
+google:
+  client-id:
+  client-secret:
+  redirect-uri: http://localhost:8080/api/user/google/callback
+  token-uri: https://oauth2.googleapis.com/token
+  resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
+
