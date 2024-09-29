@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KakaoController {
 
   private final KakoaService kakoaService;
-
+  
+  // TODO: 각 소셜로그인 테스트 완료 후 통합 구현 하기 (중복 많음)
 
   // 여기에서 신규 로그인 인지, 기존 로그인 인지 구분해서 보내주면 됨 그럼 jwt 통해서 유저 디테일 받으면 되고 ㅇㅈㅇㅈ
-  @GetMapping("/api/user/kakao/callback")
+  @GetMapping("/api/user/social/kakao/callback")
   public ResponseEntity<CommonResponse<String>> kakaoLogin(@RequestParam String code) throws JsonProcessingException {
 
     // 리다이렉트로 전달 받은 인가 코드로 -> JwtAccessToken 발급 또는 추가 정보 입력 메세지 출력

@@ -16,7 +16,9 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -37,17 +40,11 @@ public class NaverService {
   private final PasswordEncoder passwordEncoder;
   private final JwtUtil jwtUtil;
 
-  // yml의 naver.client-id 값을 주입
-  @Value("${naver.client-id}")
-  private String naverClientId;
+  private String naverClientId = "lCrwGp5COA3B9pAbLbba";
 
-  // yml의 naver.client-secret 값을 주입
-  @Value("${naver.client-secret}")
-  private String naverClientSecret;
+  private String naverClientSecret = "OCtREZGW3J";
 
-  // yml의 naver.redirect-uri 값을 주입
-  @Value("${naver.redirect-uri}")
-  private String naverRedirectUri;
+  private String naverRedirectUri = "http://localhost:8080/api/user/social/naver/callback";
 
   public CommonResponse<String> naverLogin(String code) throws JsonProcessingException {
 
@@ -83,10 +80,14 @@ public class NaverService {
    * @TODO 네이버 API에서 반환하는 에러 메시지나 상황에 따라 추가적인 예외 처리가 필요할 수 있습니다.
    */
   private String getToken(String code) throws JsonProcessingException {
-    // 요청 URL 만들기
     URI uri = UriComponentsBuilder
-      .fromUriString("https://nid.naver.com")
-      .path("/oauth2.0/token")
+      .fromHttpUrl("https://nid.naver.com/oauth2.0/token")
+      .queryParam("grant_type", "authorization_code")
+      .queryParam("client_id", naverClientId)
+      .queryParam("client_secret", naverClientSecret)
+      .queryParam("redirect_uri", naverRedirectUri)
+      .queryParam("state", 1234)
+      .queryParam("code", code)
       .encode()
       .build()
       .toUri();
@@ -95,27 +96,29 @@ public class NaverService {
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-    // HTTP Body 생성
-    MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-    body.add("grant_type", "authorization_code");
-    body.add("client_id", naverClientId);
-    body.add("client_secret", naverClientSecret);
-    body.add("redirect_uri", naverRedirectUri);
-    body.add("code", code);
-
-    RequestEntity<MultiValueMap<String, String>> requestEntity = RequestEntity
-      .post(uri)
-      .headers(headers)
-      .body(body);
-
     // HTTP 요청 보내기
-    ResponseEntity<String> response = restTemplate.exchange(
-      requestEntity,
-      String.class
-    );
+    ResponseEntity<String> response;
+    try {
+      response = restTemplate.exchange(
+        uri,
+        HttpMethod.POST,
+        new HttpEntity<>(headers),
+        String.class
+      );
+    } catch (RestClientException e) {
+      log.error("Error occurred while requesting token: {}", e.getMessage());
+      throw new RuntimeException("Token request failed", e);
+    }
 
     // HTTP 응답 (JSON) -> 액세스 토큰 파싱
     JsonNode jsonNode = new ObjectMapper().readTree(response.getBody());
+    log.info("Naver API Response: {}", jsonNode.toString());
+
+    // 에러 처리
+    if (jsonNode.has("error")) {
+      throw new RuntimeException("Naver API Error: " + jsonNode.get("error_description").asText());
+    }
+
     return jsonNode.get("access_token").asText();
   }
 
@@ -191,7 +194,7 @@ public class NaverService {
         // email: 네이버 email
         String email = naverUserInfoDto.getEmail();
 
-        naverUser = new User(naverUserInfoDto.getNickname(), encodedPassword, email, naverId, SocialProvider.NAVER);
+        naverUser = new User(naverUserInfoDto.getNickname(), email, encodedPassword, naverId, SocialProvider.NAVER);
       }
       userRepository.save(naverUser);
     }

@@ -21,7 +21,7 @@ public class User extends TimeStamped {
   @Column
   private Double balance; // 잔고 테스트용
 
-  @Column(nullable = false, length = 10)
+  // @Column(nullable = false, length = 10)
   private String userName; //x
 
   @Column(length = 13)
@@ -30,25 +30,25 @@ public class User extends TimeStamped {
   @Column(length = 13)
   private String foreignerRegistrationNumber; //x
 
-  @Column(nullable = false)
+  // @Column(nullable = false)
   private Boolean isForeigner = false; //x
 
-  @Column(nullable = false, length = 15, unique = true)
+  @Column(nullable = false, length = 250, unique = true)
   private String accountId; //x
 
-  @Column(nullable = false)
+  // @Column(nullable = false)
   private String password; //0
 
   @Column(length = 10)
   private String nickname = ""; //0
 
-  @Column(nullable = false, length = 255)
+  // @Column(nullable = false, length = 255)
   private String email; //x
 
   @Column(length = 255)
   private String userPicture = ""; //0
 
-  @Column(nullable = false, length = 10)
+  // @Column(nullable = false, length = 10)
   private String status = "ACTIVE";
 
   @Column(length = 10)
@@ -64,7 +64,7 @@ public class User extends TimeStamped {
   private String phoneNumber = ""; //x
 
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
+  // @Column(nullable = false)
   private Role role;
 
   @Column

@@ -85,7 +85,7 @@ public class KakoaService {
     MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
     body.add("grant_type", "authorization_code");
     body.add("client_id", "008f89eefe38bdd7187a1020453c8498"); // 카카오 디벨롭에 있는 본인의 REST API키
-    body.add("redirect_uri", "http://localhost:8080/api/user/kakao/callback");
+    body.add("redirect_uri", "http://localhost:8080/api/user/social/kakao/callback");
     body.add("code", code);
 
     RequestEntity<MultiValueMap<String, String>> requestEntity = RequestEntity
@@ -169,7 +169,7 @@ public class KakoaService {
         // email: kakao email
         String email = kakaoUserInfo.getEmail();
 
-        kakaoUser = new User(kakaoUserInfo.getNickname(), encodedPassword, email, kakaoId);
+        kakaoUser = new User(kakaoUserInfo.getNickname(), email, encodedPassword, kakaoId);
       }
       userRepository.save(kakaoUser);
     }

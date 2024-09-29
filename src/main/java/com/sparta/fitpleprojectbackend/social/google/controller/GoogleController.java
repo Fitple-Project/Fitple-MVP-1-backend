@@ -21,7 +21,7 @@ public class GoogleController {
 
   private final GoogleService googleService;
 
-  @GetMapping("/api/user/google/callback")
+  @GetMapping("/api/user/social/google/callback")
   public ResponseEntity<CommonResponse<String>> googleLogin(@RequestParam String code) throws JsonProcessingException {
 
     // 리다이렉트로 전달 받은 인가 코드로 -> JwtAccessToken 발급 또는 추가 정보 입력 메세지 출력

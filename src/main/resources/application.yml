@@ -49,14 +49,14 @@ kakao:
     secret-key: PRD441A04CE52647D4E94FFA919FD67242007B40  # 시크릿 키
 
 naver:
-  client-id:
-  client-secret:
-  redirect-uri: http://localhost:8080/api/user/naver/callback
+  client-id: ${naver.client-id}
+  client-secret: ${naver.client-secret}
+  redirect-uri: http://localhost:8080/api/user/social/naver/callback
 
 google:
-  client-id:
-  client-secret: 
-  redirect-uri: http://localhost:8080/api/user/google/callback
+  client-id: ${google.client-id}
+  client-secret: ${google.client-secret}
+  redirect-uri: http://localhost:8080/api/user/social/google/callback
   token-uri: https://oauth2.googleapis.com/token
   resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
 

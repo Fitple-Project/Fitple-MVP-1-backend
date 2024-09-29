@@ -38,15 +38,12 @@ public class GoogleService {
   private final PasswordEncoder passwordEncoder;
   private final JwtUtil jwtUtil;
 
-  // yml의 google.client-id 값을 주입
   @Value("${google.client-id}")
   private String googleClientId;
 
-  // yml의 google.client-secret 값을 주입
   @Value("${google.client-secret}")
   private String googleClientSecret;
 
-  // yml의 google.redirect-uri 값을 주입
   @Value("${google.redirect-uri}")
   private String googleRedirectUri;
 
@@ -129,8 +126,8 @@ public class GoogleService {
   private GoogleUserInfoDto getGoogleUserInfo(String accessToken) throws JsonProcessingException {
     // 요청 URL 만들기
     URI uri = UriComponentsBuilder
-      .fromUriString("https://www.googleapis.com")
-      .path("/oauth2/v2/userinfo")
+      .fromUriString("https://openidconnect.googleapis.com")
+      .path("/v1/userinfo")
       .encode()
       .build()
       .toUri();
@@ -154,8 +151,10 @@ public class GoogleService {
     // JSON 응답 파싱
     JsonNode jsonNode = new ObjectMapper().readTree(response.getBody());
 
+    System.out.println("Google API Response: " + response);
+
     // 필요한 정보만 추출
-    String id = jsonNode.get("id").asText();
+    String id = jsonNode.get("sub").asText();
     String email = jsonNode.get("email").asText();
     String nickname = jsonNode.get("name").asText();
 
@@ -188,7 +187,7 @@ public class GoogleService {
         // email: 구글 email
         String email = googleUserInfoDto.getEmail();
 
-        googleUser = new User(googleUserInfoDto.getNickname(), encodedPassword, email, googleId, SocialProvider.GOOGLE);
+        googleUser = new User(googleUserInfoDto.getNickname(), email, encodedPassword, googleId, SocialProvider.GOOGLE);
       }
       userRepository.save(googleUser);
     }

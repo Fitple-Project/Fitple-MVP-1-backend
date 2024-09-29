@@ -50,6 +50,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/profile/owners/**").hasRole("OWNER")
                 .requestMatchers("/api/stores/**").permitAll().requestMatchers("/api/stores/admin/**")
                 .hasAuthority("OWNER")
+                .requestMatchers("/api/user/social/**").permitAll()
                 .requestMatchers("/api/pt-payments/test/**").authenticated()
                 .anyRequest().authenticated());
 
