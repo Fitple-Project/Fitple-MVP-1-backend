@@ -21,7 +21,7 @@ public class KakaoController {
 
   private final KakoaService kakoaService;
   
-  // TODO: 각 소셜로그인 테스트 완료 후 통합 구현 하기 (중복 많음)
+  // TODO: 각 소셜로그인 테스트 완료 후 통합 구현 하기 (중복 많음)(인터페이스, 다같이 중복하기), Json 노드 리스폰 
 
   // 여기에서 신규 로그인 인지, 기존 로그인 인지 구분해서 보내주면 됨 그럼 jwt 통해서 유저 디테일 받으면 되고 ㅇㅈㅇㅈ
   @GetMapping("/api/user/social/kakao/callback")
