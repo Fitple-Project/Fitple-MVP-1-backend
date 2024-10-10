@@ -26,6 +26,7 @@ Content-Type: application/json
 "nickname": "owner123",
 "email": "testowner@example.com",
 "businessRegistrationNumber": "1234567890",
+"businessName": "name",
 "zipcode": "12345",
 "mainAddress": "Main St 123",
 "detailedAddress": "Apt 456",

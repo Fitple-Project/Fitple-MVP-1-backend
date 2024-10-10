@@ -1,13 +1,19 @@
 package com.sparta.gymspartaprojectbackend.product.entity;
 
 import com.sparta.gymspartaprojectbackend.common.TimeStamped;
-import com.sparta.gymspartaprojectbackend.payment.enums.PaymentStatus;
-import com.sparta.gymspartaprojectbackend.payment.enums.PaymentType;
 import com.sparta.gymspartaprojectbackend.payment.enums.PtTimes;
+import com.sparta.gymspartaprojectbackend.store.entity.Store;
 import com.sparta.gymspartaprojectbackend.trainer.entity.Trainer;
-import com.sparta.gymspartaprojectbackend.user.entity.User;
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 
 @Getter
@@ -19,20 +25,16 @@ public class Product extends TimeStamped {
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "trainer_id", nullable = true)
-  private Trainer trainer;
+  @JoinColumn(name = "store_id", nullable = true)
+  private Store store;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  @JoinColumn(name = "trainer_id", nullable = true)
+  private Trainer trainer;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = true)
   private PtTimes ptTimes;
-
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  private PaymentType paymentType;
 
   @Column(nullable = false)
   private double amount;
@@ -41,46 +43,31 @@ public class Product extends TimeStamped {
   @Column(nullable = false)
   private double productPrice;
 
-  @Enumerated(EnumType.STRING)
-  private PaymentStatus paymentStatus;
-
-  @Column
-  private LocalDateTime paymentDate;
-
-  @Column
-  private LocalDateTime expiryDate;
-
   @Column(nullable = false)
   private boolean isActive;
 
   protected Product() {
   }
 
-  public Product(Trainer trainer, User user, PtTimes ptTimes, PaymentType paymentType,
-    double amount, double productPrice, PaymentStatus paymentStatus, LocalDateTime paymentDate,
-    LocalDateTime expiryDate, boolean isActive) {
+  public Product(Trainer trainer, PtTimes ptTimes,
+      double amount, double productPrice, boolean isActive) {
     this.trainer = trainer;
-    this.user = user;
     this.ptTimes = ptTimes;
-    this.paymentType = paymentType;
     this.amount = amount;
     this.productPrice = productPrice;
-    this.paymentStatus = paymentStatus;
-    this.paymentDate = paymentDate;
-    this.expiryDate = expiryDate;
     this.isActive = isActive;
   }
 
-  public Product(User user, PaymentType paymentType, double amount, double productPrice,
-    PaymentStatus paymentStatus, LocalDateTime paymentDate, LocalDateTime expiryDate,
-    boolean isActive) {
-    this.user = user;
-    this.paymentType = paymentType;
+  public Product(Store store, double amount, double productPrice,
+      boolean isActive) {
+    this.store = store;
     this.amount = amount;
     this.productPrice = productPrice;
-    this.paymentStatus = paymentStatus;
-    this.paymentDate = paymentDate;
-    this.expiryDate = expiryDate;
     this.isActive = isActive;
   }
+
+  public void deactivate() {
+    this.isActive = false;
+  }
+
 }

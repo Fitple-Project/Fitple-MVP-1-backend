@@ -29,10 +29,6 @@ public class StoreResponse {
 
   private List<String> reviews;
 
-  private List<String> memberships;
-
-  private List<String> services;
-
   /**
    * Store 엔티티를 기반으로 StoreResponse 객체를 생성.
    *
@@ -50,7 +46,5 @@ public class StoreResponse {
     this.price = store.getPrice();
     this.image = store.getImage();
     this.reviews = store.getReviews();
-    this.memberships = store.getMemberships();
-    this.services = store.getServices();
   }
 }

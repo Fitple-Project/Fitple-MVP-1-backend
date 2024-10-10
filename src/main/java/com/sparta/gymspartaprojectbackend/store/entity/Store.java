@@ -2,7 +2,9 @@ package com.sparta.gymspartaprojectbackend.store.entity;
 
 import com.sparta.gymspartaprojectbackend.common.TimeStamped;
 import com.sparta.gymspartaprojectbackend.owner.entity.Owner;
+import com.sparta.gymspartaprojectbackend.product.entity.Product;
 import com.sparta.gymspartaprojectbackend.store.dto.StoreRequest;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,18 +49,6 @@ public class Store extends TimeStamped {
   @Column(nullable = false)
   private String storeTel;
 
-  @ElementCollection
-  private List<String> services;
-
-  @ElementCollection
-  private List<String> memberships;
-
-  @ElementCollection
-  private List<String> ptConsultations;
-
-  @ElementCollection
-  private List<String> trainerList;
-
   // 추가 필드
   @Column
   private String price;
@@ -71,6 +62,9 @@ public class Store extends TimeStamped {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owner_id", nullable = false)
   private Owner owner;
+
+  @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Product> prouducts;
 
   public Store(String storeName, String address, String storeInfo, String storeHour, String storeTel,
     String price, String image, Owner owner) {
@@ -93,10 +87,6 @@ public class Store extends TimeStamped {
     this.storeInfo = request.getStoreInfo();
     this.storeHour = request.getStoreHour();
     this.storeTel = request.getStoreTel();
-    this.services = request.getServices();
-    this.memberships = request.getMemberships();
-    this.ptConsultations = request.getPtConsultations();
-    this.trainerList = request.getTrainerList();
     this.price = request.getPrice(); // 추가 필드
     this.image = request.getImage(); // 추가 필드
     this.reviews = request.getReviews(); // 추가 필드
@@ -110,10 +100,6 @@ public class Store extends TimeStamped {
     this.storeInfo = request.getStoreInfo();
     this.storeHour = request.getStoreHour();
     this.storeTel = request.getStoreTel();
-    this.services = request.getServices();
-    this.memberships = request.getMemberships();
-    this.ptConsultations = request.getPtConsultations();
-    this.trainerList = request.getTrainerList();
     this.price = request.getPrice(); // 추가 필드
     this.image = request.getImage(); // 추가 필드
     this.reviews = request.getReviews(); // 추가 필드

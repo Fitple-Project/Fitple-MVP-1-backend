@@ -71,8 +71,8 @@ public class Trainer extends TimeStamped {
   @JoinColumn(name = "store_id", nullable = false)
   private Store store;
 
-  @Column
-  private int availableSessionCount;
+  @Column(nullable = true)
+  private Integer availableSessionCount;
 
 
   public Trainer() {
