@@ -3,9 +3,11 @@ package com.sparta.fitpleprojectbackend.user.entity;
 import com.sparta.fitpleprojectbackend.common.TimeStamped;
 import com.sparta.fitpleprojectbackend.enums.Role;
 import com.sparta.fitpleprojectbackend.enums.SocialProvider;
+import com.sparta.fitpleprojectbackend.post.entity.Post;
 import com.sparta.fitpleprojectbackend.social.kakao.dto.AddInfoRequestDto;
 import com.sparta.fitpleprojectbackend.user.dto.UpdateUserProfileRequest;
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -87,6 +89,9 @@ public class User extends TimeStamped {
 
   @Column
   private Long birthday;
+
+  @OneToMany(mappedBy = "user")
+  private List<Post> postList;
 
   public User() {
   }
