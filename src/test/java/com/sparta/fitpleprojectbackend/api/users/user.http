@@ -3,14 +3,14 @@ POST http://localhost:8080/api/user/signup
 Content-Type: application/json
 
 {
-  "userName": "손아엘",
-  "accountId": "ael121",
-  "password": "ael121667",
-  "confirmPassword": "ael121667",
-  "email": "ael121@naver.com",
-  "phoneNumber": "01012345678",
-  "residentRegistrationNumber": "123456789123",
-  "foreignerRegistrationNumber": "123456789123"
+  "userName": "폰폰아엘",
+  "accountId": "aaa121",
+  "password": "aaa121667",
+  "confirmPassword": "aaa121667",
+  "email": "ael12111@naver.com",
+  "phoneNumber": "01022345674",
+  "residentRegistrationNumber": "123456789124",
+  "foreignerRegistrationNumber": "123456789124"
 }
 
 ### 유저 로그인

@@ -3,6 +3,7 @@ package com.sparta.fitpleprojectbackend.user.entity;
 import com.sparta.fitpleprojectbackend.common.TimeStamped;
 import com.sparta.fitpleprojectbackend.enums.Role;
 import com.sparta.fitpleprojectbackend.enums.SocialProvider;
+import com.sparta.fitpleprojectbackend.follow.entity.Follow;
 import com.sparta.fitpleprojectbackend.post.entity.Post;
 import com.sparta.fitpleprojectbackend.social.kakao.dto.AddInfoRequestDto;
 import com.sparta.fitpleprojectbackend.user.dto.UpdateUserProfileRequest;
@@ -92,6 +93,13 @@ public class User extends TimeStamped {
 
   @OneToMany(mappedBy = "user")
   private List<Post> postList;
+
+  //팔로우
+  @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
+  private List<Follow> followings;
+
+  @OneToMany(mappedBy = "toUser", fetch = FetchType.LAZY)
+  private List<Follow> followers;
 
   public User() {
   }

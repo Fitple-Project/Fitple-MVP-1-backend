@@ -3,14 +3,17 @@ package com.sparta.fitpleprojectbackend.user.controller;
 import com.sparta.fitpleprojectbackend.common.CommonResponse;
 import com.sparta.fitpleprojectbackend.jwtutil.JwtUtil;
 import com.sparta.fitpleprojectbackend.security.UserDetailsImpl;
+import com.sparta.fitpleprojectbackend.user.dto.SemiUserProfile;
 import com.sparta.fitpleprojectbackend.user.dto.UpdatePasswordRequest;
 import com.sparta.fitpleprojectbackend.user.dto.UpdateUserProfileRequest;
 import com.sparta.fitpleprojectbackend.user.dto.UserSignupRequest;
 import com.sparta.fitpleprojectbackend.user.dto.ReadUserResponse;
 import com.sparta.fitpleprojectbackend.user.exception.UserException;
+import com.sparta.fitpleprojectbackend.user.service.UserSearchService;
 import com.sparta.fitpleprojectbackend.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,10 +25,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
   private final UserService userService;
+  private final UserSearchService userSearchService;
   private final JwtUtil jwtUtil;
 
-  public UserController(UserService userService, JwtUtil jwtUtil) {
+  public UserController(UserService userService, UserSearchService userSearchService, JwtUtil jwtUtil) {
     this.userService = userService;
+    this.userSearchService = userSearchService;
     this.jwtUtil = jwtUtil;
   }
 
@@ -143,6 +148,20 @@ public class UserController {
     ReadUserResponse readUserResponse = userService.readUserProfile(userDetails);
     CommonResponse<ReadUserResponse> response = new CommonResponse<>(
         HttpStatus.OK.value(), "프로필 조회 완료", readUserResponse);
+    return ResponseEntity.ok(response);
+  }
+
+  /**
+   * 유저 검색 세미
+   *
+   * @param username 검색할 유저 이름
+   * @return 이름에 맞는 모든 유저
+   */
+  @GetMapping("/search/{username}")
+  public ResponseEntity<CommonResponse<List<SemiUserProfile>>> searchSemiUserProfile(@PathVariable String username) {
+
+    CommonResponse<List<SemiUserProfile>> response = userSearchService.searchSemiUserProfile(username);
+
     return ResponseEntity.ok(response);
   }
 }

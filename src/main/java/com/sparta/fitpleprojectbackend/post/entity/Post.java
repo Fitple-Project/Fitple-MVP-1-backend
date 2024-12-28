@@ -2,6 +2,7 @@ package com.sparta.fitpleprojectbackend.post.entity;
 
 import com.sparta.fitpleprojectbackend.common.TimeStamped;
 import com.sparta.fitpleprojectbackend.enums.postStatus;
+import com.sparta.fitpleprojectbackend.post.dto.PostRequestDto;
 import com.sparta.fitpleprojectbackend.user.entity.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,10 +39,21 @@ public class Post extends TimeStamped {
   private User user;
 
   @Builder
-  public Post(String title, String content ,User user) {
-    this.postTitle = title;
-    this.postContent = content;
+  public Post(PostRequestDto requestDto ,User user) {
+    this.postTitle = requestDto.getTitle();
+    this.postContent = requestDto.getContent();
+    this.postPicture = requestDto.getPicture();
     this.user = user;
     this.poststatus = postStatus.NORMAL;
+  }
+
+  public void updatePost(String title, String content) {
+    this.postTitle = title;
+    this.postContent = content;
+  }
+
+  public void deletePost() {
+    poststatus = postStatus.DELETE;
+    deletedAt = LocalDateTime.now();
   }
 }
