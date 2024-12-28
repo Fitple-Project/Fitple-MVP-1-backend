@@ -51,8 +51,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/stores/**").permitAll().requestMatchers("/api/stores/admin/**")
                 .hasAuthority("OWNER")
                 .requestMatchers("/api/user/social/**").permitAll()
+                .requestMatchers("/ws/**").permitAll()
                 .requestMatchers("/api/pt-payments/test/**").authenticated()
-                .anyRequest().authenticated());
+                .anyRequest().permitAll());//.authenticated());
 
     http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

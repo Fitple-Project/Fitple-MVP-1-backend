@@ -4,8 +4,8 @@ spring:
 #    username: ${DB_USERNAME}
 #    password: ${DB_PASSWORD}
     url: jdbc:mysql://localhost:3306/fitple_project
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: root
+    password: 135246adgsfh!
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -49,13 +49,17 @@ kakao:
     secret-key: PRD441A04CE52647D4E94FFA919FD67242007B40  # 시크릿 키
 
 naver:
-  client-id: ${naver.client-id}
-  client-secret: ${naver.client-secret}
+#  client-id: ${naver.client-id}
+#  client-secret: ${naver.client-secret}
+  client-id: 321321
+  client-secret: 321321
   redirect-uri: http://localhost:8080/api/user/social/naver/callback
 
 google:
-  client-id: ${google.client-id}
-  client-secret: ${google.client-secret}
+#  client-id: ${google.client-id}
+#  client-secret: ${google.client-secret}
+  client-id: 123
+  client-secret: 32131
   redirect-uri: http://localhost:8080/api/user/social/google/callback
   token-uri: https://oauth2.googleapis.com/token
   resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
